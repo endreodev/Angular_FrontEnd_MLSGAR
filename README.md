@@ -1,2 +1,7 @@
-# Flexy-Angular-pro
-Flexy Angular Admin Dashboard
+# Angular Admin Dashboard
+
+
+Angular Admin Dashboard
+
+Node 20.19.1
+
