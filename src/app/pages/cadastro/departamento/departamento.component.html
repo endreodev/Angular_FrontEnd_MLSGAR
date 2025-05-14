@@ -1,0 +1,138 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="row justify-content-between gap-16">
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100 hide-hint">
+        
+          <input 
+                matInput 
+                placeholder="Pesquisar Departamento" 
+                (keyup)="applyFilter($any($event.target).value)" />
+          
+          <mat-icon matSuffix>
+            <i-tabler name="search" class="icon-20 d-flex m-t-2"></i-tabler>
+          </mat-icon>
+        
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4 d-flex align-items-center justify-content-end">
+
+        <button mat-flat-button color="primary" class="m-4" (click)="openDialog('Adicionar', {})" >
+          <div class="d-flex align-items-center">  <i-tabler class="icon-20 m-r-4" name="plus"></i-tabler>
+            Adicionar Departamento
+          </div>
+        </button>
+
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" class="w-100">
+        
+        <ng-container matColumnDef="#">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">#</th>
+          <td mat-cell *matCellDef="let element; let i = index" class="f-s-14">{{ i + 1 }}</td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="depcdemp">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Código da Empresa</th>
+          <td mat-cell *matCellDef="let element" class="f-s-14">{{ element.depcdemp }}</td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="depcddep">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Código do Departamento</th>
+          <td mat-cell *matCellDef="let element" class="f-s-14">{{ element.depcddep }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="depdescr">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Descrição</th>
+          <td mat-cell *matCellDef="let element" class="f-s-14">{{ element.depdescr }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="depcddep_orig">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Departamento Original</th>
+          <td mat-cell *matCellDef="let element" class="f-s-14">{{ element.depcddep_orig }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="f-s-16 f-w-600">Ações</th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a (click)="openDialog('Visualizar', element)" class="m-r-10 cursor-pointer">
+              <i-tabler name="eye" class="icon-18"></i-tabler>
+            </a>
+            <a (click)="openDialog('Editar', element)" class="m-r-10 cursor-pointer">
+              <i-tabler name="edit" class="icon-18"></i-tabler>
+            </a>
+            <a (click)="openDialog('Delete', element)" class="cursor-pointer">
+              <i-tabler name="trash" class="icon-18"></i-tabler>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Filter Modal -->
+<ng-template #filterModal>
+  <h2 mat-dialog-title class="mb-4 text-center">Filtros Avançados</h2>
+  <mat-dialog-content>
+    <form class="d-flex justify-content-center">
+      <div class="col-md-10">
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Código Usuário</mat-label>
+            <input matInput placeholder="Código Usuário" [(ngModel)]="filters.codigoUsuario" name="codigoUsuario" />
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Código Filial</mat-label>
+            <input matInput type="number" placeholder="Código Filial" [(ngModel)]="filters.codigoFilial"
+              name="codigoFilial" />
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Tipo Documento</mat-label>
+            <input matInput placeholder="Tipo Documento" [(ngModel)]="filters.tipoDocumento" name="tipoDocumento" />
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Número Documento</mat-label>
+            <input matInput placeholder="Número Documento" [(ngModel)]="filters.numeroDocumento"
+              name="numeroDocumento" />
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Código Departamento</mat-label>
+            <input matInput placeholder="Código Departamento" [(ngModel)]="filters.codigoDepartamento"
+              name="codigoDepartamento" />
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Código Tipo Vínculo</mat-label>
+            <input matInput type="number" placeholder="Código Tipo Vínculo" [(ngModel)]="filters.codigoTipoVinculo"
+              name="codigoTipoVinculo" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-flat-button color="primary" (click)="applyFilters()" [mat-dialog-close]="true">Aplicar Filtros</button>
+  </mat-dialog-actions>
+</ng-template>

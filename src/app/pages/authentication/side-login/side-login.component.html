@@ -1,0 +1,76 @@
+<div class="blank-layout-container justify-content-center" *ngIf="!isLoading">
+  <div class="position-relative row w-100 h-100">
+    <div class="col-lg-7 col-xl-8 bg-gredient p-0">
+      <div class="p-24 h-100">
+        <div class="align-items-center justify-content-center img-height d-none d-lg-flex">
+          <img src="/assets/images/backgrounds/login-bg.svg" alt="login" style="max-width: 600px" />
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-xl-4 p-0">
+      <div class="p-32 d-flex align-items-start align-items-lg-center justify-content-center h-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-lg-9 max-width-form">
+            <h4 class="f-w-700 f-s-24 m-0">Acesso ao Sistema</h4>
+            <span class="d-block f-w-500 d-block m-t-10">
+              <!--<a [routerLink]="['/authentication/side-register']"
+                class="text-decoration-none text-secondary f-w-500 f-s-14">
+                Crie uma conta</a>-->
+            </span>
+
+            <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()" [class.disabled]="isLoading">
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <mat-label>Nome de usuário</mat-label>
+                <input matInput formControlName="username" />
+                @if(f['username'].touched && f['username'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if(f['username'].errors && f['username'].errors['required']) {
+                  <div class="text-error">Nome é obrigatório.</div>
+                  } @if(f['username'].errors && f['username'].errors['minlength']) {
+                  <div class="text-error">O nome deve ter 6 caracteres.</div>
+                  }
+                </mat-hint>
+                }
+              </mat-form-field>
+
+              <!-- senha -->
+
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <mat-label>Senha</mat-label>
+                <input matInput type="password" formControlName="password" />
+                @if(f['password'].touched && f['password'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if(f['password'].errors && f['password'].errors['required'])
+                  {
+                  <div class="text-error">Senha é obrigatória.</div>
+                  }
+                </mat-hint>
+                }
+              </mat-form-field>
+
+              <div class="d-flex align-items-center m-b-12">
+                <mat-checkbox color="primary">Lembrar este dispositivo</mat-checkbox>
+              </div>
+              <div class="d-flex align-items-center m-b-12">
+
+                <div class="d-flex align-items-center m-b-12">
+                  <a [routerLink]="['/authentication/forgot']"
+                      class="text-secondary f-w-600 text-decoration-none m-l-auto f-s-14">
+                      Esqueceu a senha?
+                    </a>
+                </div>
+
+              </div>
+              <button mat-flat-button color="primary" class="w-100" [disabled]="!form.valid || isLoading">
+                Acessar Sistema
+              </button>
+            </form>
+
+            <div class="or-border m-t-30">Acesso Profissional</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

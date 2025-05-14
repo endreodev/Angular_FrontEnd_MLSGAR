@@ -1,0 +1,236 @@
+<div class="d-flex align-items-center justify-content-between m-b-16 p-x-20 p-t-16">
+  <h3>{{action}} Usuário</h3>
+  <button mat-icon-button mat-dialog-close class="d-flex justify-content-center">
+    <i-tabler name="x" class="icon-20 d-flex"></i-tabler>
+  </button>
+</div>
+
+<!-- -------------------------------------------------------------- -->
+<!-- Add/Edit Usuario -->
+<!-- -------------------------------------------------------------- -->
+
+@if(action !== 'Delete') {
+<mat-dialog-content>
+  <mat-tab-group class="custom-tab-group">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="custom-tab-label" style="width: 200px; text-align: left; display: block;">Cadastro</span>
+      </ng-template>
+      <form #userForm="ngForm" class="p-4 m-t-16">
+        <div class="row">
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>U.O.</mat-label>
+              <input
+                type="text"
+                matInput
+                required
+                id="usucduop"
+                name="usucduop"
+                [(ngModel)]="local_data.usucduop"
+                placeholder="Unidade Organizacional"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>U.O. Original</mat-label>
+              <input
+                type="text"
+                matInput
+                id="usucduop_orig"
+                name="usucduop_orig"
+                [(ngModel)]="local_data.usucduop_orig"
+                placeholder="U.O. Original"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Filial</mat-label>
+              <mat-select
+                required
+                id="usucdfil"
+                name="usucdfil"
+                [(ngModel)]="local_data.usucdfil"
+                [disabled]="isViewMode">
+                <mat-option *ngFor="let filial of filiais" [value]="filial.codigo || filial.usucdfil">
+                  {{ filial.nome || filial.descricao || filial.usucdfil }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Departamento</mat-label>
+              <mat-select
+                required
+                id="usucddep"
+                name="usucddep"
+                [(ngModel)]="local_data.usucddep"
+                [disabled]="isViewMode">
+                <mat-option *ngFor="let dep of departamentos" [value]="dep.codigo || dep.usucddep">
+                  {{ dep.nome || dep.descricao || dep.usucddep }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Tipo Vínculo</mat-label>
+              <input
+                type="text"
+                matInput
+                required
+                id="usucdtpv"
+                name="usucdtpv"
+                [(ngModel)]="local_data.usucdtpv"
+                placeholder="Código do Tipo de Vínculo"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nome</mat-label>
+              <input
+                type="text"
+                matInput
+                required
+                id="usunores"
+                name="usunores"
+                [(ngModel)]="local_data.usunores"
+                placeholder="Nome do Usuário"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Tipo Documento</mat-label>
+              <mat-select
+                required
+                id="usutpdoc"
+                name="usutpdoc"
+                [(ngModel)]="local_data.usutpdoc"
+                [disabled]="isViewMode">
+                <mat-option *ngFor="let tipo of tiposDocumento" [value]="tipo.codigo || tipo.usutpdoc">
+                  {{ tipo.nome || tipo.descricao || tipo.usutpdoc }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Tipo Doc. Original</mat-label>
+              <input
+                type="text"
+                matInput
+                id="usutpdoc_orig"
+                name="usutpdoc_orig"
+                [(ngModel)]="local_data.usutpdoc_orig"
+                placeholder="Tipo de Documento Original"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nº Documento</mat-label>
+              <input
+                type="text"
+                matInput
+                required
+                id="usunudoc"
+                name="usunudoc"
+                [(ngModel)]="local_data.usunudoc"
+                placeholder="Número do Documento"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nº Doc. Original</mat-label>
+              <input
+                type="text"
+                matInput
+                id="usunudoc_orig"
+                name="usunudoc_orig"
+                [(ngModel)]="local_data.usunudoc_orig"
+                placeholder="Número do Documento Original"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                required
+                id="usuemail"
+                name="usuemail"
+                [(ngModel)]="local_data.usuemail"
+                placeholder="Email do Usuário"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Código Usuário</mat-label>
+              <input
+                type="text"
+                matInput
+                required
+                id="usucdusu"
+                name="usucdusu"
+                [(ngModel)]="local_data.usucdusu"
+                placeholder="Código do Usuário"
+                [readonly]="isViewMode"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+
+  @if(!isViewMode) {
+    <div class="d-flex justify-content-end mt-4">
+      <button mat-button (click)="closeDialog()">
+        Cancelar
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="ms-2"
+        (click)="doAction()"
+        [disabled]="!userForm.valid"
+      >
+        {{action}}
+      </button>
+    </div>
+  }
+</mat-dialog-content>
+}
+
+<!-- -------------------------------------------------------------- -->
+<!-- Delete Usuario -->
+<!-- -------------------------------------------------------------- -->
+
+@else {
+<mat-dialog-content class="p-x-24 m-y-8">
+  <p class="f-s-16">
+    Tem certeza que deseja excluir o usuário <span class="f-w-600">{{local_data.usunores}}</span>?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="p-x-24 p-b-24">
+  <button mat-button (click)="closeDialog()">Cancelar</button>
+  <button mat-flat-button color="warn" (click)="doAction()">Excluir</button>
+</mat-dialog-actions>
+}

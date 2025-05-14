@@ -1,0 +1,59 @@
+<mat-card class="cardWithShadow wide-dialog">
+  <mat-card-content>
+    <form [formGroup]="filtroForm">
+      <div class="row justify-content-between m-b-24">
+        <div class="col-sm-12">
+          <h4 class="f-s-18 f-w-600">Filtrar Clientes</h4>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="row m-y-24">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Código Cliente</mat-label>
+            <input matInput type="number" formControlName="cdcli" placeholder="Código Cliente" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Código Filial</mat-label>
+            <input matInput type="number" formControlName="cdfil" placeholder="Código Filial" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>País</mat-label>
+            <input matInput type="number" formControlName="paisd" placeholder="País" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Tipo Doc</mat-label>
+            <input matInput type="number" formControlName="idtpd" placeholder="Tipo Doc" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Número Documento</mat-label>
+            <input matInput formControlName="nudoc" placeholder="Número Documento" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+      
+      <div class="row m-t-24">
+        <div class="col-sm-12 d-flex justify-content-end">
+          <button mat-flat-button class="bg-error text-white m-r-10" (click)="onCancel()">
+            Cancelar
+          </button>
+          <button mat-flat-button color="primary" (click)="onApply()" [disabled]="!filtroForm.valid">
+            Aplicar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
